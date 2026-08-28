@@ -64,6 +64,18 @@ Room content, nightly rates, booking fees, and amenities are local demo data. Da
 - Keep the Worker under Free-plan CPU and subrequest limits; payment is the only external request in a live flow.
 - Surface a friendly retry state if a Cloudflare daily limit is reached. This is a demo/pilot architecture, not a guarantee of unlimited free production capacity.
 
+## Admin portal
+
+The demo includes a protected `/admin` portal for hotel staff. It is separate from the public booking experience and has three views:
+
+1. **Sign in (`/admin/login`):** a seeded email/password login. The deployment seed is `admin@aureliahouse.my` / `AureliaDemo2026!`; the README must warn operators to replace it before any non-demo use.
+2. **Bookings overview (`/admin`):** booking rows showing guest, room, stay dates, payment state, and stay state. Staff can filter all, upcoming, in-house, and checked-out bookings.
+3. **Booking detail (`/admin/bookings/:id`):** contact details, stay itinerary, and clear check-in/check-out actions.
+
+Admin credentials are stored as password hashes in a new `admins` D1 table. On successful login a Pages Function produces a short-lived, signed, HTTP-only, `Secure`, `SameSite=Lax` session cookie; the session itself is persisted in D1. Protected API endpoints validate the session before returning PII or changing booking states. The browser never receives the password hash or session secret.
+
+Checking in changes a confirmed booking to `checked_in`; checking out is allowed only from `checked_in` and changes it to `checked_out`. Each state transition is appended to `booking_status_history` with the actor, timestamp, previous status, and next status. Repeated requests are idempotent: requesting the already-current status returns success without a duplicate history row.
+
 ## Responsive and accessibility requirements
 
 The landing page stays readable from mobile to desktop; the booking panel becomes a full-width stacked flow on smaller screens. Controls use native semantic elements, keyboard-visible focus states, labeled inputs, accessible error associations, and a live success status. Color is never the only success or validation indicator.

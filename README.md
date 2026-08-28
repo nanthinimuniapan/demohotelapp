@@ -38,6 +38,7 @@ This project contains a `functions/` directory, so deploy it with Wrangler (not 
 
    ```bash
    npx wrangler d1 execute aurelia-house --remote --file=migrations/0001_initial.sql
+   npx wrangler d1 execute aurelia-house --remote --file=migrations/0002_admin_portal.sql
    ```
 
 5. Build and make the first production deployment. Replace `aurelia-house-booking` with an available Pages project name if needed:
@@ -83,6 +84,7 @@ Use this route when every push should build and deploy automatically. GitHub-con
    ```bash
    npx wrangler d1 create aurelia-house
    npx wrangler d1 execute aurelia-house --remote --file=migrations/0001_initial.sql
+   npx wrangler d1 execute aurelia-house --remote --file=migrations/0002_admin_portal.sql
    git add wrangler.jsonc
    git commit -m "Configure Cloudflare D1 binding"
    git push
@@ -98,6 +100,10 @@ Use this route when every push should build and deploy automatically. GitHub-con
 
 - **Demo payment:** enabled by default and stores a `demo_confirmed` booking without contacting a payment provider.
 - **Razorpay Curlec:** intentionally unavailable in this demo. Before enabling it, add a server-side order endpoint, configure the provider secret as a Cloudflare secret, and verify the provider webhook signature before setting a booking to `paid`. Never expose the provider secret or card details in browser code, D1, or source control.
+
+## Admin portal
+
+Visit `/admin` to access the hotel operations portal. The demo seed is `admin@aureliahouse.my` with password `AureliaDemo2026!`. This account is for demonstration only: change the seed password and use a unique Cloudflare secret/session policy before giving any real staff access.
 
 ## Free-tier note
 
