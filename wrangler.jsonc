@@ -7,13 +7,7 @@
 		{
 			"binding": "DB",
 			"database_name": "aurelia-house",
-			"database_id": "replace-with-your-d1-id"
-		},
-		{
-			"binding": "aurelia_house",
-			"database_name": "aurelia-house",
-			"database_id": "cf952e17-7d66-4d20-ba79-5698569db6a3",
-			"remote": true
+			"database_id": "cf952e17-7d66-4d20-ba79-5698569db6a3"
 		}
 	]
 }
