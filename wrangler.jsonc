@@ -1,7 +1,19 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "aurelia-house-booking",
-  "compatibility_date": "2026-08-28",
-  "pages_build_output_dir": "./dist",
-  "d1_databases": [{ "binding": "DB", "database_name": "aurelia-house", "database_id": "replace-with-your-d1-id" }]
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "aurelia-house-booking",
+	"compatibility_date": "2026-08-28",
+	"pages_build_output_dir": "./dist",
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "aurelia-house",
+			"database_id": "replace-with-your-d1-id"
+		},
+		{
+			"binding": "aurelia_house",
+			"database_name": "aurelia-house",
+			"database_id": "cf952e17-7d66-4d20-ba79-5698569db6a3",
+			"remote": true
+		}
+	]
 }
